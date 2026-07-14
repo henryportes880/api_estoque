@@ -2,10 +2,14 @@ import repo from '../repositories/stock-movement.repository.js';
 import repoProduct from '../repositories/product.repository.js';
 import createError from '../utils/app-error.js';
 
-function ensureValidPayload({ productId, type, quantity }) {
+function ensureValidPayload({ productId, type, quantity, reason }) {
   if (!productId) throw createError('Produto é obrigatório.', 400);
-  if (!type || ['IN', 'OUT'].indexOf(type) === -1 ) throw createError('Tipo é inválido.', 400);
-  if (!quantity || quantity <= 0) throw createError('Quantidade inválida.', 400);
+  if (!type || !['IN', 'OUT'].includes(type))
+    throw createError('Tipo inválido.', 400);
+  if (!quantity || quantity <= 0)
+    throw createError('Quantidade inválida.', 400);
+  if (!reason?.trim())
+    throw createError('Motivo é obrigatório.', 400);
 }
 
 export default {
@@ -26,11 +30,12 @@ export default {
     if (newStock < 0) throw createError('Quantidade insuficiente no estoque.', 400);
     
     const stockMovement = await repo.create({
-      productId: data.productId,
-      userId: _userId,
-      type: data.type.trim().toUpperCase(),
-      quantity: data.quantity
-    });
+  productId: data.productId,
+  userId: _userId,
+  type: data.type.trim().toUpperCase(),
+  quantity: data.quantity,
+  reason: data.reason.trim()
+});
 
     if (stockMovement) {
       await repoProduct.updateById(

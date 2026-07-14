@@ -3,7 +3,14 @@ import stockMovementService from '../services/stock-movement.service.js';
 export default {
   async create(req, res, next) {
     try {
-      const stockMovement = await stockMovementService.createStockMovement(req.body, req.user.id);
+      console.log('BODY:', req.body);
+      console.log('USER:', req.user);
+
+      const stockMovement = await stockMovementService.createStockMovement(
+        req.body,
+        req.user.id
+      );
+
       res.status(201).json(stockMovement);
     } catch (error) {
       next(error);
@@ -12,8 +19,8 @@ export default {
 
   async list(req, res, next) {
     try {
-      const stockMovement = await stockMovementService.listStockMovements();
-      res.json(stockMovement);
+      const stockMovements = await stockMovementService.listStockMovements();
+      res.json(stockMovements);
     } catch (error) {
       next(error);
     }
