@@ -12,7 +12,7 @@ export default {
 
   async list(req, res, next) {
     try {
-      const stockMovement = await stockMovementService.list();
+      const stockMovement = await stockMovementService.listStockMovements();
       res.json(stockMovement);
     } catch (error) {
       next(error);

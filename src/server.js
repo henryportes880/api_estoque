@@ -4,7 +4,6 @@ import app from "./app.js";
 
 const port = env.port || 3000;
 
-
 (async () => {
     try {
         await connect(env.db_uri);

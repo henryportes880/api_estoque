@@ -12,10 +12,12 @@ export default {
     ensureValidPayload(data);
     
     return repo.create({
+      code: data.code,
       name: data.name.trim(),
       description: data.description.trim(),
       price: data.price,
       categories: data.categories
+      
     });
   },
 

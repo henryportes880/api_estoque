@@ -11,18 +11,19 @@ export default {
     }
   },
 
+  
   async list(req, res, next) {
-    try {
-      const product = await productService.listUsers();
-      res.json(product);
-    } catch (error) {
-      next(error);
-    }
-  },
+  try {
+    const product = await productService.listProducts();
+    res.json(product);
+  } catch (error) {
+    next(error);
+  }
+},
 
   async get(req, res, next) {
     try {
-      const product = await productService.getUser(req.params.id);
+     const product = await productService.getProduct(req.params.id);
       res.json(product);
     } catch (error) {
       next(error);
