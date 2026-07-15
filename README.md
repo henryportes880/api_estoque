@@ -1,173 +1,160 @@
-# Guardião do Almoxarifado - Backend
+# 📦 Sistema de Controle de Estoque
 
-API REST desenvolvida em Node.js para gerenciamento de estoque de produtos e movimentações de entrada e saída.
+API REST para gerenciamento de estoque desenvolvida durante o curso **Técnico em Informática** da **Lions Startups**.
 
-## Tecnologias
+O sistema permite o gerenciamento de usuários, produtos e movimentações de estoque, utilizando autenticação JWT, controle de permissões e atualização automática do estoque.
+
+---
+
+# ✨ Funcionalidades
+
+- 🔐 Autenticação com JWT
+- 👥 Cadastro e consulta de usuários
+- 📦 Cadastro e gerenciamento de produtos
+- 🔍 Consulta de produtos por ID
+- 📥 Entrada de estoque
+- 📤 Saída de estoque
+- 📊 Atualização automática do estoque
+- 📜 Histórico de movimentações
+- 🛡 Controle de permissões (ADMIN e READER)
+- ⚠ Validação de estoque insuficiente
+
+---
+
+# 🛠 Tecnologias Utilizadas
+
+## Backend
 
 - Node.js
 - Express
 - MongoDB
 - Mongoose
-- JWT (JSON Web Token)
-- bcrypt
+- JWT
+- bcryptjs
 - Nodemon
 
----
+## Frontend
 
-## Funcionalidades
-
-### Autenticação
-- Login de usuários
-- Autenticação via JWT
-- Controle de permissões por perfil (ADMIN e READER)
-
-### Usuários
-- Cadastro
-- Listagem
-- Busca por ID
-
-### Produtos
-- Cadastro
-- Listagem
-- Busca por ID
-- Controle automático de estoque
-
-### Movimentações
-- Entrada de estoque
-- Saída de estoque
-- Histórico de movimentações
-- Validação de estoque insuficiente
+- Angular
+- TypeScript
+- SCSS
 
 ---
 
-## Estrutura do Projeto
+# 📁 Estrutura do Projeto
 
-```
-src/
-├── config/
-├── controllers/
-├── middlewares/
-├── models/
-├── repositories/
-├── routes/
-├── services/
-├── utils/
-├── app.js
-└── server.js
+```text
+api-almoxarifado-main/
+├── backend/
+│   ├── src/
+│   │   ├── config/
+│   │   ├── controllers/
+│   │   ├── middlewares/
+│   │   ├── models/
+│   │   ├── repositories/
+│   │   ├── routes/
+│   │   ├── services/
+│   │   ├── utils/
+│   │   ├── app.js
+│   │   └── server.js
+│   ├── package.json
+│   └── README.md
+│
+└── frontend/
+    └── guardiao-frontend/
+        ├── src/
+        ├── public/
+        ├── package.json
+        └── README.md
 ```
 
 ---
 
-## Instalação
+# 🔒 Segurança
 
-Clone o projeto
+- Autenticação utilizando JWT.
+- Controle de acesso por perfis (ADMIN e READER).
+- Validação dos dados recebidos pela API.
+- Tratamento centralizado de erros.
+- Atualização automática do estoque após movimentações.
 
-```bash
-git clone <url-do-repositorio>
-```
+---
 
-Entre na pasta
+# ⚡ Como Executar
 
-```bash
-cd api-almoxarifado
-```
-
-Instale as dependências
+## Backend
 
 ```bash
+cd backend
 npm install
-```
-
-Crie um arquivo `.env`
-
-```env
-PORT=3000
-
-DB_URI=mongodb://localhost:27017/guardiao-almoxarifado
-
-JWT_SECRET=sua_chave_secreta
-
-APP_NAME=Guardião do Almoxarifado
-```
-
-Execute o projeto
-
-```bash
 npm run dev
 ```
 
+## Frontend
+
+```bash
+cd frontend/guardiao-frontend
+npm install
+ng serve
+```
+
 ---
 
-## Endpoints
+# 🌐 Endpoints
 
-### Autenticação
+## 🔐 Autenticação
 
 | Método | Endpoint |
 |---------|----------|
-| POST | /api/auth/login |
+| POST | `/api/auth/login` |
 
----
-
-### Usuários
+## 👥 Usuários
 
 | Método | Endpoint |
 |---------|----------|
-| POST | /api/users |
-| GET | /api/users |
-| GET | /api/users/:id |
+| POST | `/api/users` |
+| GET | `/api/users` |
+| GET | `/api/users/:id` |
 
----
-
-### Produtos
+## 📦 Produtos
 
 | Método | Endpoint |
 |---------|----------|
-| POST | /api/products |
-| GET | /api/products |
-| GET | /api/products/:id |
+| POST | `/api/products` |
+| GET | `/api/products` |
+| GET | `/api/products/:id` |
 
----
-
-### Movimentações
+## 📋 Movimentações
 
 | Método | Endpoint |
 |---------|----------|
-| POST | /api/stock-movements |
-| GET | /api/stock-movements |
+| POST | `/api/stock-movements` |
+| GET | `/api/stock-movements` |
 
 ---
 
-## Regras de Negócio
+# ✅ Testes
 
-- Apenas usuários ADMIN podem cadastrar produtos.
-- Apenas usuários ADMIN podem realizar movimentações.
-- Usuários READER possuem acesso somente para consulta.
-- Não é permitido retirar mais itens do que o disponível em estoque.
-- O estoque é atualizado automaticamente após cada movimentação.
+Todos os endpoints da API foram testados utilizando o **Postman**.
 
----
+### Casos de teste realizados
 
-## Testes
-
-Todas as rotas foram testadas utilizando o Postman.
-
-Foram validados:
-
-- Login
-- Cadastro de usuários
-- Cadastro de produtos
-- Listagem de produtos
-- Consulta por ID
-- Entrada de estoque
-- Saída de estoque
-- Atualização automática do estoque
-- Histórico de movimentações
-- Tratamento de erros
+- ✅ Login
+- ✅ Cadastro de usuários
+- ✅ Cadastro de produtos
+- ✅ Listagem de produtos
+- ✅ Consulta de produtos por ID
+- ✅ Entrada de estoque
+- ✅ Saída de estoque
+- ✅ Atualização automática do estoque
+- ✅ Histórico de movimentações
+- ✅ Validação de estoque insuficiente
+- ✅ Produto inexistente
 
 ---
 
-## Autor
+# 🧑‍💻 Autor
 
-Henry Rafael Ribeiro Portes
+**Henry Rafael Ribeiro Portes**
 
-Lions
+Projeto acadêmico desenvolvido em **2026** durante o curso **Técnico em Informática** da **Lions Startups**, com ênfase em desenvolvimento de aplicações utilizando **Node.js** (Turma da Noite).
