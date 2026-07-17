@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 
 // middlewares
 import { authMiddleware } from './middlewares/auth-middleware.js';
@@ -15,6 +16,10 @@ import stockMovementRoutes from './routes/stock-movement.routes.js';
 const app = express();
 
 // configurações da api
+app.use(cors({
+    origin: 'http://localhost:4200'
+}));
+
 app.use(express.json());
 app.use(logMiddleware);
 
